@@ -1,6 +1,6 @@
-# ol & ol-layerswitcher with Webpack
+# OGC API - Tiles
 
-This example demonstrates how the `ol` package and ol-layerswitcher with Webpack.
+This example demonstrates how to read OGC API - Tiles layers in openlayers
 
 Install the project dependencies.
 
@@ -10,6 +10,6 @@ Create a bundle for the browser.
 
     npm run build
 
-Open `index.html` to see the result.
+Run dev server
 
-    open index.html
+    npm run serve
