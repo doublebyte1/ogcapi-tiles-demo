@@ -7,8 +7,12 @@ import { transform } from 'ol/proj';
 import LayerGroup from 'ol/layer/Group';
 import LayerImage from 'ol/layer/Image';
 import TileLayer from 'ol/layer/Tile';
-import SourceOSM from 'ol/source/OSM';
-import StadiaMaps from 'ol/source/StadiaMaps.js';
+import {OSM} from 'ol/source.js';
+import XYZ from 'ol/source/XYZ.js';
+import MVT from 'ol/format/MVT.js';
+import VectorTileLayer from 'ol/layer/VectorTile.js';
+import OGCMapTile from 'ol/source/OGCMapTile.js';
+import OGCVectorTile from 'ol/source/OGCVectorTile.js';
 
 import LayerSwitcher from 'ol-layerswitcher';
 
@@ -18,60 +22,65 @@ var map = new Map({
         new LayerGroup({
             'title': 'Base maps',
             layers: [
-                
-                new LayerGroup({
-                    title: 'Water color with labels',
-                    type: 'base',
-                    combine: true,
-                    visible: false,
-                     layers: [
-                        new TileLayer({
-                            source: new StadiaMaps({
-                              layer: 'stamen_watercolor',
-                              // apiKey: 'OPTIONAL'
-                            }),
-                          }),
-                          new TileLayer({
-                            source: new StadiaMaps({
-                              layer: 'stamen_terrain_labels',
-                              // apiKey: 'OPTIONAL'
-                            }),
-                          }),
-                    ] 
-                }),
-/*                 new LayerTile({
-                    title: 'Water color',
-                    type: 'base',
-                    visible: false,
-                    source: new SourceStamen({
-                        layer: 'watercolor'
-                    })
-                }), */
                 new TileLayer({
                     title: 'OSM',
                     type: 'base',
                     visible: true,
-                    source: new SourceOSM()
-                })
+                    source: new OSM()
+                }),
+                new TileLayer({
+                    title: 'Esri Tile Layer',
+                    type: 'base',
+                    visible: true,
+                    source: new XYZ({
+                      attributions:
+                        'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+                        'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+                      url:
+                        'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                        'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+                    }),
+                  })
             ]
         }),
-/*         new LayerGroup({
-            title: 'Overlays',
+         new LayerGroup({
+            title: 'OGC API - Tiles',
             layers: [
-                new LayerImage({
-                    title: 'Countries',
-                    source: new SourceImageArcGISRest({
-                        ratio: 1,
-                        params: {'LAYERS': 'show:0'},
-                        url: "https://ons-inspire.esriuk.com/arcgis/rest/services/Administrative_Boundaries/Countries_December_2016_Boundaries/MapServer"
+                new TileLayer({
+                    title: 'Blue Marble',
+                    visible: false,
+                    source: new OGCMapTile({
+                      url: 'https://maps.gnosis.earth/ogcapi/collections/blueMarble/map/tiles/WebMercatorQuad',
+                    }),
+                  }),
+                  new VectorTileLayer({
+                    title: 'Natural Earth',
+                    visible: false,
+                    source: new OGCVectorTile({
+                      url: 'https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:ne_10m_admin_0_countries/tiles/WebMercatorQuad',
+                      format: new MVT(),
+                    }),
+                    background: '#d1d1d1',
+                    style: {
+                      'stroke-width': 0.6,
+                      'stroke-color': '#8c8b8b',
+                      'fill-color': '#f7f7e9',
+                    },
+                  }),
+                  new VectorTileLayer({
+                    title: 'Daara',
+                    visible: false,
+                    source: new OGCVectorTile({
+                      url: 'https://demo.ldproxy.net/daraa/tiles/WebMercatorQuad',
+                      format: new MVT(),
                     })
-                })
+                  }),
             ]
-        }) */
+        })
     ],
     view: new View({
         center: transform([-0.92, 52.96], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 6
+        zoom: 2
     })
 });
 
