@@ -29,6 +29,19 @@ var map = new Map({
                     source: new OSM()
                 }),
                 new TileLayer({
+                    title: 'Esri Nat Geo World Map',
+                    type: 'base',
+                    visible: true,
+                    source: new XYZ({
+                      attributions:
+                        'Tiles &copy; Esri &mdash; National Geographic, Esri, ' +
+                        'DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+                      url:
+                        'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                        'NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
+                    }),
+                  }),
+/*                 new TileLayer({
                     title: 'Esri Tile Layer',
                     type: 'base',
                     visible: true,
@@ -41,7 +54,7 @@ var map = new Map({
                         'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
                     }),
                   })
-            ]
+ */            ]
         }),
          new LayerGroup({
             title: 'OGC API - Tiles',
@@ -66,15 +79,7 @@ var map = new Map({
                       'stroke-color': '#8c8b8b',
                       'fill-color': '#f7f7e9',
                     },
-                  }),
-                  new VectorTileLayer({
-                    title: 'Daara',
-                    visible: false,
-                    source: new OGCVectorTile({
-                      url: 'https://demo.ldproxy.net/daraa/tiles/WebMercatorQuad',
-                      format: new MVT(),
-                    })
-                  }),
+                  })
             ]
         })
     ],

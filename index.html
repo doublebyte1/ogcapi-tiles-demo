@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./prism.css">
     <title>OGC API - Tiles Demo</title>
     <style>
       html, body {
@@ -9,15 +11,45 @@
         height: 100%;
       }
       #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
         width: 100%;
+        height: 50vh;;
       }
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <div class="container">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">OGC API - Tiles Demo</h1>
+          <p class="lead">This map shows a bunch of OGC API - Tiles layers (e.g.: map tiles, vector tiles).
+            They are easily integrated, using the <a href="https://openlayers.org/">OpenLayers</a> library, which supports the <a href="https://docs.ogc.org/is/20-057/20-057.html">standard</a> out-of-the-box 
+            using the <a href="https://openlayers.org/en/latest/apidoc/module-ol_source_OGCMapTile-OGCMapTile.html">OGCMapTile</a> 
+            and <a href="https://openlayers.org/en/latest/apidoc/module-ol_source_OGCVectorTile-OGCVectorTile.html">OGCVectorTile</a> classes (see code sample bellow).
+          </p>
+        </div>
+      </div>
+      <div id="map"></div>
+      <div class="overflow-x-scroll">
+        <pre><code class="language-css">
+          layers: [
+          new TileLayer({
+              source: new OGCMapTile({
+                url: 'https://maps.gnosis.earth/ogcapi/collections/blueMarble/map/tiles/WebMercatorQuad',
+              }),
+            }),
+            new VectorTileLayer({
+              source: new OGCVectorTile({
+                url: 'https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:' + 
+                'ne_10m_admin_0_countries/tiles/WebMercatorQuad',
+                format: new MVT(),
+              })
+            })
+      ]
+        </code></pre>
+      </div>
+    </div>
     <script src="./bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./prism.js"></script>
   </body>
 </html>
