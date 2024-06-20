@@ -79,6 +79,31 @@ var map = new Map({
                       'stroke-color': '#8c8b8b',
                       'fill-color': '#f7f7e9',
                     },
+                  }),
+                  new VectorTileLayer({
+                    title: 'Daraa',
+                    visible: false,
+                    source: new OGCVectorTile({
+                      url: 'https://demo.ldproxy.net/daraa/tiles/WebMercatorQuad/',
+                      format: new MVT(),
+                    }),
+                    style: {
+                      'stroke-width': 1,
+                      'stroke-color': 'red'
+                    },
+                  }),
+                  new VectorTileLayer({
+                    title: 'Large Lakes',
+                    visible: false,
+                    source: new OGCVectorTile({
+                      url: 'https://demo.pygeoapi.io/master/collections/lakes/tiles/WebMercatorQuad',
+                      //url: 'https://emotional.byteroad.net/collections/hex350_grid_obesity_1920/tiles/WebMercatorQuad',
+                      format: new MVT(),
+                    }),
+                    style: {
+                      'stroke-width': 1,
+                      'stroke-color': 'red'
+                    },
                   })
             ]
         })
