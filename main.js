@@ -60,14 +60,14 @@ var map = new Map({
             title: 'OGC API - Tiles',
             layers: [
                 new TileLayer({
-                    title: 'Blue Marble',
+                    title: '<a href="https://maps.gnosis.earth/ogcapi/collections/blueMarble/">Blue Marble',
                     visible: false,
                     source: new OGCMapTile({
                       url: 'https://maps.gnosis.earth/ogcapi/collections/blueMarble/map/tiles/WebMercatorQuad',
                     }),
                   }),
                   new VectorTileLayer({
-                    title: 'Natural Earth',
+                    title: '<a href="https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:ne_10m_admin_0_countries/">Natural Earth</a>',
                     visible: false,
                     source: new OGCVectorTile({
                       url: 'https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:ne_10m_admin_0_countries/tiles/WebMercatorQuad',
@@ -80,8 +80,15 @@ var map = new Map({
                       'fill-color': '#f7f7e9',
                     },
                   }),
+                  new TileLayer({
+                    title: '<a href="https://test.cubewerx.com/cubewerx/cubeserv/demo/ogcapi/Foundation/collections/aerofacp_1m/">Airport Facilities Points</a>',
+                    visible: false,
+                    source: new OGCMapTile({
+                      url: 'https://test.cubewerx.com/cubewerx/cubeserv/demo/ogcapi/Foundation/collections/aerofacp_1m/styles/default/map/tiles/smerc',
+                    }),
+                  }),
                   new VectorTileLayer({
-                    title: 'Daraa',
+                    title: '<a href="https://demo.ldproxy.net/daraa/">Daraa</a>',
                     visible: false,
                     source: new OGCVectorTile({
                       url: 'https://demo.ldproxy.net/daraa/tiles/WebMercatorQuad/',
@@ -92,7 +99,7 @@ var map = new Map({
                       'stroke-color': 'red'
                     },
                   }),
-                  new VectorTileLayer({
+/*                   new VectorTileLayer({
                     title: 'Large Lakes',
                     visible: false,
                     source: new OGCVectorTile({
@@ -104,7 +111,8 @@ var map = new Map({
                       'stroke-width': 1,
                       'stroke-color': 'red'
                     },
-                  })
+                  }) */
+
             ]
         })
     ],
